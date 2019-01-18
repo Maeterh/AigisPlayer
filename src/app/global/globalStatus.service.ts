@@ -24,7 +24,8 @@ export class GlobalStatusService {
         RightPluginWidth: 0,
         NewVersionAVB: false,
         CurrentGame: new GameModel('None', new Size(640, 960), 'about:blank'),
-        AccountList: new Array<string>()
+        AccountList: new Array<string>(),
+        SetZoom: false,
     })
     constructor(
         private electronService: ElectronService
@@ -48,6 +49,7 @@ export class GlobalStatusService {
         const extraWidth = this.GlobalStatusStore.Get('ExtraWidth').Value;
         const leftPlugin = this.GlobalStatusStore.Get('LeftPluginWidth').Value;
         const rightPlugin = this.GlobalStatusStore.Get('RightPluginWidth').Value;
+        this.GlobalStatusStore.Get('SetZoom').Dispatch(true);
         this.electronService.ReSize(new Size(
             Math.floor((currentGame.Size.Height + extraHeight) * (zoom / 100)),
             Math.floor((currentGame.Size.Width + extraWidth) * (zoom / 100) + leftPlugin + rightPlugin)

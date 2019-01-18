@@ -65,7 +65,9 @@ export class AigisGameDataService {
                 if (channel && this.subscription.has(channel)) {
                     Promise.all([this.parseData(res), this.parseData(req)])
                         .then(
-                            ([response, request]) => this.subscription.get(channel).forEach(v => v(url, response, request)),
+                            ([response, request]) => {
+                                this.subscription.get(channel).forEach(v => v(url, response, request))
+                            },
                             (err) => {
                                 console.log('err in ', channel, res, req);
                                 throw err;

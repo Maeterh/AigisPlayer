@@ -30,18 +30,18 @@ export class GameComponent implements AfterViewInit, OnDestroy {
         private debuggerService: DebuggerService,
         private pluginService: PluginService
     ) {
-        this.subscriptionList.push(
-            this.globalStatusService.GlobalStatusStore.Get('Zoom').Subscribe(v => {
-                this.zoom = v;
-                if (this.gameView) {
-                    if (this.gameView.setZoomFactor === undefined) { return; }
-                    this.gameView.setZoomFactor(this.zoom / 100);
-                }
-            })
-        );
+        // this.subscriptionList.push(
+        //     this.globalStatusService.GlobalStatusStore.Get('Zoom').Subscribe(v => {
+        //         this.zoom = v;
+        //         if (this.gameView) {
+        //             if (this.gameView.setZoomFactor === undefined) { return; }
+        //             this.gameView.setZoomFactor(this.zoom / 100);
+        //         }
+        //     })
+        // );
     }
     ngAfterViewInit() {
-        this.gameView = <WebviewTag>document.getElementById('gameView');
+        /*this.gameView = <WebviewTag>document.getElementById('gameView');
         this.gameService.WebView = this.gameView;
         let webContent: WebContents = null;
         const webview = this.gameView;
@@ -106,6 +106,7 @@ export class GameComponent implements AfterViewInit, OnDestroy {
             option['webPreferences']['session'] = webContent.session;
             this.electronService.CreateBrowserWindow(e.url, option);
         })
+        */
     }
     ngOnDestroy() {
         for (let i = 0; i < this.subscriptionList.length; i++) {
